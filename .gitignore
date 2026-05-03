@@ -1,12 +1,4 @@
-__pycache__/
-*.pyc
-*.pyo
-.venv/
-.env
-data/chroma/
-data/sqlite/
-data/ollama/
-data/hf_cache/
-data/raw/
-data/.localsage_history
+
+src/__pycache__
 .DS_Store
+data/ollama
