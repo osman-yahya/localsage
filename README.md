@@ -32,7 +32,7 @@ You need Docker Desktop (or Docker Engine + the Compose plugin). Nothing else is
 Python, Ollama, the model and the embedder all live inside containers.
 
 ```bash
-git clone <your-fork> LocalSage
+git clone https://github.com/osman-yahya/localsage
 cd LocalSage
 
 # 1. build the app image (one-time, a few minutes)
