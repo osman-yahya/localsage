@@ -47,7 +47,7 @@ docker compose logs -f model-puller   # ctrl-C once you see "model ready"
 # 4. (optional) seed the store with the homework's 20 people + 20 places
 docker compose run --rm app python -m scripts.bootstrap
 
-# 5. open the chat
+# 5. open the chat ( IN NEW TERMINAL INSIDE ./LocalSage )
 ./localsage
 # or:  docker compose run --rm app (Windows users)
 ```
