@@ -44,10 +44,10 @@ docker compose up -d ollama model-puller
 # 3. wait until the puller exits successfully (one-time, ~1-2 GB)
 docker compose logs -f model-puller   # ctrl-C once you see "model ready"
 
-# 4. (optional) seed the store with the homework's 20 people + 20 places
+# 4. seed the store with the homework's 20 people + 20 places
 docker compose run --rm app python -m scripts.bootstrap
 
-# 5. open the chat ( IN NEW TERMINAL INSIDE ./LocalSage )
+# 5. open the chat 
 ./localsage
 # or:  docker compose run --rm app (Windows users)
 ```
