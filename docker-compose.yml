@@ -1,0 +1,49 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: localsage-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./data/ollama:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+    restart: unless-stopped
+
+  model-puller:
+    image: ollama/ollama:latest
+    container_name: localsage-puller
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - LOCALSAGE_MODEL=${LOCALSAGE_MODEL:-gemma3n:e2b}
+    volumes:
+      - ./data/ollama:/root/.ollama
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - 'ollama pull "$$LOCALSAGE_MODEL" && echo "model ready"'
+    restart: "no"
+
+  app:
+    build:
+      context: .
+    container_name: localsage-app
+    depends_on:
+      ollama:
+        condition: service_healthy
+      model-puller:
+        condition: service_completed_successfully
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - LOCALSAGE_CONFIG=/app/config/config.yaml
+    volumes:
+      - ./config:/app/config
+      - ./data:/data
+    stdin_open: true
+    tty: true

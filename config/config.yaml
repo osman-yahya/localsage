@@ -1,0 +1,40 @@
+ollama:
+  host: http://ollama:11434
+  model: gemma3n:e2b
+  temperature: 0.2
+  num_ctx: 4096
+embedder:
+  model: sentence-transformers/all-MiniLM-L6-v2
+  device: cpu
+  normalize: true
+vectorstore:
+  path: /data/chroma
+  collection: localsage
+retrieval:
+  top_k: 7
+  oversample: 4
+  min_similarity: 0.25
+chunking:
+  outer_size: 900
+  outer_overlap: 200
+  inner_size: 350
+  inner_overlap: 100
+wiki:
+  language: en
+  user_agent: LocalSage/0.1 (educational; contact via repo)
+  search_results: 3
+  skip_sections:
+  - References
+  - External links
+  - See also
+  - Bibliography
+  - Notes
+  - Further reading
+  - Sources
+  - Footnotes
+llm:
+  max_context_chars: 6000
+  stream: true
+ui:
+  show_sources: true
+  banner: true

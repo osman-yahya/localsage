@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Convenience wrapper. After `docker compose up -d ollama model-puller`, this attaches an
+# interactive CLI session. The `up` flow is documented in the README; this script is a
+# shortcut for re-entering the chat after the stack is already running.
+set -euo pipefail
+exec docker compose run --rm app "$@"
